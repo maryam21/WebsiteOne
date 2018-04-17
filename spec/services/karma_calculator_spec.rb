@@ -32,15 +32,14 @@ describe KarmaCalculator do
       end
     end
 
-    describe 'for members attending hangouts' do
-      let(:hangout) { FactoryBot.create(:event_instance) }
+    describe 'for new members attending hangouts' do
       # subject {  }
-      let(:user) { FactoryBot.create(:user, :with_karma, created_at: 31.days.ago, gplus: hangout.participants.to_unsafe_h.first.last['person']['id']) }
+      let(:user) { FactoryBot.create(:user, :with_karma, created_at: 31.days.ago) }
 
-      it 'gives points for hangout participation' do
+      it 'event participation count is zero' do
         subject = KarmaCalculator.new(user)
         subject.perform
-        expect(user.hangouts_attended_with_more_than_one_participant).to eq 1
+        expect(user.event_participation_count).to eq 0
       end
     end
 
