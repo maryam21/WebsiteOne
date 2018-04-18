@@ -378,5 +378,5 @@ And(/^I should not see any HTML tags$/) do
 end
 
 Then(/^I should see (\d+) "([^"]*)" events$/) do |number, event|
-  expect(page.all(:css, 'a', text: event).count).to be == number.to_i
+  expect(page.all(:css, 'a', text: event, visible: false).count).to be == number.to_i
 end
